@@ -1,0 +1,31 @@
+{
+    "models": [
+        {
+            "name": "Logistic Regression",
+            "accuracy": 0.8333333333333334,
+            "f1_score": 0.45454545454545453
+        },
+        {
+            "name": "Random Forest",
+            "accuracy": 0.8333333333333334,
+            "f1_score": 0.45454545454545453
+        }
+    ],
+    "feature_importances": {
+        "JobRole_Laboratory Technician": 0.4744299105422049,
+        "JobRole_Research Scientist": 0.385659265171353,
+        "JobRole_Manager": 0.32555041589391515,
+        "EducationField_Technical Degree": 0.3239595574099255,
+        "JobRole_Sales Executive": 0.2882271304212709,
+        "JobRole_Manufacturing Director": 0.25424813354389947,
+        "EducationField_Marketing": 0.25133948855628274,
+        "JobRole_Healthcare Representative": 0.24316878607588774,
+        "EducationField_Human Resources": 0.21080697284126831,
+        "MaritalStatus_Married": 0.1846044074512219,
+        "JobRole_Sales Representative": 0.17953468604837353,
+        "EducationField_Life Sciences": 0.16807847366580955,
+        "EnvironmentSatisfaction": 0.14042851709186088,
+        "StockOptionLevel": 0.11352372248525691,
+        "MaritalStatus_Single": 0.10329861639582667
+    }
+}

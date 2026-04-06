@@ -1,0 +1,227 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>HR Analytics Dashboard</title>
+  <script src="https://unpkg.com/@phosphor-icons/web"></script>
+  <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+  <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+</head>
+<body>
+
+  <!-- Sidebar -->
+  <aside class="sidebar">
+    <div class="logo-container">
+      <div class="logo-circle"></div>
+      <div class="logo-text">NeuralHR</div>
+    </div>
+    <nav class="nav-links">
+      <div class="nav-item active" data-target="dashboard">
+        <i class="ph ph-squares-four"></i> Dashboard
+      </div>
+      <div class="nav-item" data-target="directory">
+        <i class="ph ph-users"></i> Directory
+      </div>
+      <div class="nav-item" data-target="predict">
+        <i class="ph ph-magic-wand"></i> Predict Attrition
+      </div>
+      <div class="nav-item" data-target="insights">
+        <i class="ph ph-chart-line-up"></i> Model Insights
+      </div>
+      <div class="nav-item" data-target="history">
+        <i class="ph ph-clock-counter-clockwise"></i> History
+      </div>
+      <div class="nav-item" data-target="admin">
+        <i class="ph ph-shield-check"></i> Admin Panel
+      </div>
+    </nav>
+    <div style="flex-grow: 1;"></div>
+    <div class="nav-item" id="logoutBtn" style="color: var(--danger-color);">
+      <i class="ph ph-sign-out"></i> Logout
+    </div>
+  </aside>
+
+  <!-- Login Overlay -->
+  <div id="loginOverlay" class="login-overlay">
+    <div class="glass-panel" style="width: 350px; text-align: center;">
+      <h2 style="margin-bottom: 0.5rem;">Admin Login</h2>
+      <p style="color: var(--text-secondary); margin-bottom: 2rem; font-size: 0.9em;">Secure HR Portal Access</p>
+      <form id="loginForm" style="display: flex; flex-direction: column; gap: 1rem;">
+        <input type="text" id="loginUser" class="form-control" placeholder="Username" required>
+        <input type="password" id="loginPass" class="form-control" placeholder="Password" required>
+        <button type="submit" class="btn btn-primary" style="justify-content: center;">Sign In</button>
+      </form>
+      <p id="loginError" style="color: var(--danger-color); font-size: 0.85em; margin-top: 1rem; display: none;">Invalid credentials</p>
+    </div>
+  </div>
+
+  <!-- Main Content -->
+  <main class="main-content">
+    
+    <!-- Dashboard Section -->
+    <section id="dashboard" class="section active">
+      <header>
+        <div>
+          <h1>Overview</h1>
+          <p class="subtitle">AI-driven insights for organizational health</p>
+        </div>
+      </header>
+
+      <div class="dashboard-grid">
+        <div class="glass-panel stat-card">
+          <span class="stat-title">Total Employees</span>
+          <span class="stat-value" id="stat-total">-</span>
+        </div>
+        <div class="glass-panel stat-card">
+          <span class="stat-title">Attrition Count</span>
+          <span class="stat-value" id="stat-attrition-count">-</span>
+        </div>
+        <div class="glass-panel stat-card">
+          <span class="stat-title">Attrition Rate</span>
+          <span class="stat-value" id="stat-attrition-rate">-%</span>
+        </div>
+        
+        <div class="glass-panel chart-container">
+          <canvas id="attritionChart"></canvas>
+        </div>
+      </div>
+    </section>
+
+    <!-- Directory Section -->
+    <section id="directory" class="section">
+      <header>
+        <div>
+          <h1>Employee Directory</h1>
+          <p class="subtitle">Search, filter and export organization records</p>
+        </div>
+      </header>
+
+      <div class="glass-panel">
+        <div class="controls-row">
+          <div style="display: flex; gap: 1rem; position: relative;">
+             <i class="ph ph-magnifying-glass" style="position: absolute; left: 1rem; top: 50%; transform: translateY(-50%); color: var(--text-secondary);"></i>
+             <input type="text" id="searchInput" class="search-input" placeholder="Search employees..." style="padding-left: 2.5rem;">
+          </div>
+          <button id="exportCsvBtn" class="btn btn-primary">
+            <i class="ph ph-download-simple"></i> Export CSV
+          </button>
+        </div>
+
+        <div class="table-container">
+          <table id="employeesTable">
+            <thead>
+              <tr id="tableHeader">
+                <!-- Dynamically generated headers -->
+              </tr>
+            </thead>
+            <tbody id="tableBody">
+              <!-- Dynamically generated rows -->
+            </tbody>
+          </table>
+        </div>
+      </div>
+    </section>
+
+    <!-- Predict Section -->
+    <section id="predict" class="section">
+      <header>
+        <div>
+          <h1>Risk Assessment</h1>
+          <p class="subtitle">Evaluate employee attrition risk instantly using Machine Learning</p>
+        </div>
+      </header>
+
+      <div class="glass-panel" style="max-width: 900px; margin: 0 auto;">
+        <form id="predictionForm">
+          <div id="dynamicFormContainer" class="form-grid">
+            <!-- Dynamically generated fields based on features.json -->
+          </div>
+          <div style="margin-top: 2rem; display: flex; justify-content: flex-end;">
+            <button type="submit" class="btn btn-primary" id="predictBtn">
+               <i class="ph ph-brain"></i> Evaluate Risk
+            </button>
+          </div>
+        </form>
+
+        <div id="predictionResult" class="prediction-result">
+          <h3 id="resultText"></h3>
+          <p id="resultProb" style="color: var(--text-secondary);"></p>
+        </div>
+      </div>
+    </section>
+
+    <!-- Model Insights Section -->
+    <section id="insights" class="section">
+      <header>
+        <div>
+          <h1>Model Insights</h1>
+          <p class="subtitle">Feature importances and algorithm comparisons</p>
+        </div>
+      </header>
+      <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 1.5rem;">
+        <div class="glass-panel chart-container" style="grid-column: span 1; height: 400px;">
+          <h3 style="margin-bottom: 1rem; font-size: 1.1rem;">Model Accuracy vs F1</h3>
+          <canvas id="modelComparisonChart"></canvas>
+        </div>
+        <div class="glass-panel chart-container" style="grid-column: span 1; height: 400px;">
+          <h3 style="margin-bottom: 1rem; font-size: 1.1rem;">Top Features Driving Attrition</h3>
+          <canvas id="featureChart"></canvas>
+        </div>
+      </div>
+    </section>
+
+    <!-- History Section -->
+    <section id="history" class="section">
+      <header>
+        <div>
+          <h1>Prediction History</h1>
+          <p class="subtitle">Complete audit log of machine learning evaluations</p>
+        </div>
+      </header>
+      <div class="glass-panel">
+        <div class="table-container">
+          <table id="historyTable">
+            <thead>
+              <tr>
+                <th>Time & User</th>
+                <th>Prediction</th>
+                <th>Confidence</th>
+                <th>Inputs</th>
+              </tr>
+            </thead>
+            <tbody id="historyBody"></tbody>
+          </table>
+        </div>
+      </div>
+    </section>
+
+    <!-- Admin Panel -->
+    <section id="admin" class="section">
+      <header>
+        <div>
+          <h1>Admin Protocol</h1>
+          <p class="subtitle">Manage user access and system health</p>
+        </div>
+      </header>
+      <div class="glass-panel" style="max-width: 600px;">
+        <h3 style="margin-bottom: 1.5rem;">Registered Administrators</h3>
+        <div class="table-container">
+          <table id="adminTable">
+            <thead>
+              <tr>
+                <th>Username</th>
+                <th>Status</th>
+              </tr>
+            </thead>
+            <tbody id="adminBody"></tbody>
+          </table>
+        </div>
+      </div>
+    </section>
+
+  </main>
+
+  <script src="{{ url_for('static', filename='app.js') }}"></script>
+</body>
+</html>

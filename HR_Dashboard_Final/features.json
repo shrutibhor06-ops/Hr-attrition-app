@@ -1,0 +1,203 @@
+{
+    "Age": {
+        "type": "numerical",
+        "min": 18.0,
+        "max": 59.0,
+        "mean": 38.80544217687075
+    },
+    "DailyRate": {
+        "type": "numerical",
+        "min": 100.0,
+        "max": 1498.0,
+        "mean": 808.2462585034014
+    },
+    "DistanceFromHome": {
+        "type": "numerical",
+        "min": 1.0,
+        "max": 29.0,
+        "mean": 14.987755102040817
+    },
+    "Education": {
+        "type": "numerical",
+        "min": 1.0,
+        "max": 4.0,
+        "mean": 2.4537414965986395
+    },
+    "EnvironmentSatisfaction": {
+        "type": "numerical",
+        "min": 1.0,
+        "max": 4.0,
+        "mean": 2.531292517006803
+    },
+    "HourlyRate": {
+        "type": "numerical",
+        "min": 30.0,
+        "max": 99.0,
+        "mean": 64.27074829931973
+    },
+    "JobInvolvement": {
+        "type": "numerical",
+        "min": 1.0,
+        "max": 4.0,
+        "mean": 2.4959183673469387
+    },
+    "JobLevel": {
+        "type": "numerical",
+        "min": 1.0,
+        "max": 5.0,
+        "mean": 3.0
+    },
+    "JobSatisfaction": {
+        "type": "numerical",
+        "min": 1.0,
+        "max": 4.0,
+        "mean": 2.533333333333333
+    },
+    "MonthlyIncome": {
+        "type": "numerical",
+        "min": 2003.0,
+        "max": 19999.0,
+        "mean": 11172.24693877551
+    },
+    "MonthlyRate": {
+        "type": "numerical",
+        "min": 2016.0,
+        "max": 26998.0,
+        "mean": 14677.149659863946
+    },
+    "NumCompaniesWorked": {
+        "type": "numerical",
+        "min": 0.0,
+        "max": 9.0,
+        "mean": 4.372108843537415
+    },
+    "PercentSalaryHike": {
+        "type": "numerical",
+        "min": 11.0,
+        "max": 25.0,
+        "mean": 18.091836734693878
+    },
+    "PerformanceRating": {
+        "type": "numerical",
+        "min": 3.0,
+        "max": 4.0,
+        "mean": 3.4857142857142858
+    },
+    "RelationshipSatisfaction": {
+        "type": "numerical",
+        "min": 1.0,
+        "max": 4.0,
+        "mean": 2.442176870748299
+    },
+    "StockOptionLevel": {
+        "type": "numerical",
+        "min": 0.0,
+        "max": 3.0,
+        "mean": 1.5
+    },
+    "TotalWorkingYears": {
+        "type": "numerical",
+        "min": 0.0,
+        "max": 39.0,
+        "mean": 19.441496598639457
+    },
+    "TrainingTimesLastYear": {
+        "type": "numerical",
+        "min": 0.0,
+        "max": 6.0,
+        "mean": 3.052380952380952
+    },
+    "WorkLifeBalance": {
+        "type": "numerical",
+        "min": 1.0,
+        "max": 4.0,
+        "mean": 2.5476190476190474
+    },
+    "YearsAtCompany": {
+        "type": "numerical",
+        "min": 0.0,
+        "max": 19.0,
+        "mean": 9.716326530612244
+    },
+    "YearsInCurrentRole": {
+        "type": "numerical",
+        "min": 0.0,
+        "max": 14.0,
+        "mean": 7.017006802721088
+    },
+    "YearsSinceLastPromotion": {
+        "type": "numerical",
+        "min": 0.0,
+        "max": 9.0,
+        "mean": 4.637414965986395
+    },
+    "YearsWithCurrManager": {
+        "type": "numerical",
+        "min": 0.0,
+        "max": 9.0,
+        "mean": 4.6013605442176875
+    },
+    "BusinessTravel": {
+        "type": "categorical",
+        "options": [
+            "Travel_Rarely",
+            "Non-Travel",
+            "Travel_Frequently"
+        ]
+    },
+    "Department": {
+        "type": "categorical",
+        "options": [
+            "Research & Development",
+            "Sales",
+            "Human Resources"
+        ]
+    },
+    "EducationField": {
+        "type": "categorical",
+        "options": [
+            "Life Sciences",
+            "Marketing",
+            "Human Resources",
+            "Medical",
+            "Technical Degree",
+            "Other"
+        ]
+    },
+    "Gender": {
+        "type": "categorical",
+        "options": [
+            "Female",
+            "Male"
+        ]
+    },
+    "JobRole": {
+        "type": "categorical",
+        "options": [
+            "Research Scientist",
+            "Laboratory Technician",
+            "Research Director",
+            "Manager",
+            "Human Resources",
+            "Sales Executive",
+            "Manufacturing Director",
+            "Sales Representative",
+            "Healthcare Representative"
+        ]
+    },
+    "MaritalStatus": {
+        "type": "categorical",
+        "options": [
+            "Married",
+            "Single",
+            "Divorced"
+        ]
+    },
+    "OverTime": {
+        "type": "categorical",
+        "options": [
+            "Yes",
+            "No"
+        ]
+    }
+}
